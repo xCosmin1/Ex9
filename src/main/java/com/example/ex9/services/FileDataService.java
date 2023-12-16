@@ -23,4 +23,12 @@ public class FileDataService {
     public FileData getFileById(UUID id) {
        return fileDataRepository.findById(id).orElseThrow(()->new SdaException("Could not find file with id " + id));
     }
+
+    public UUID createFile(FileData fileData) {
+        //TODO use repo to create data
+    }
+
+    public void updateFile(FileData fileData, UUID id) {
+        //TODO try to find file first. If found set the new values and save it
+    }
 }
