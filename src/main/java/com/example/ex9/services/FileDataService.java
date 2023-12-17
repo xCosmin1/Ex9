@@ -25,10 +25,17 @@ public class FileDataService {
     }
 
     public UUID createFile(FileData fileData) {
-        //TODO use repo to create data
+        fileDataRepository.save(fileData);
+        return fileData.getId();
     }
 
     public void updateFile(FileData fileData, UUID id) {
         //TODO try to find file first. If found set the new values and save it
+       FileData existingInDB=getFileById(id);
+        existingInDB.setFileName(fileData.getFileName());
+        existingInDB.setExtension(fileData.getExtension());
+        existingInDB.setContent(fileData.getContent());
+        existingInDB.setSizeInKb(fileData.getSizeInKb());
+        fileDataRepository.save(existingInDB);
     }
 }
