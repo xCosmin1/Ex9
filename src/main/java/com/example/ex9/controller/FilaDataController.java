@@ -39,7 +39,7 @@ public class FilaDataController {
         //TODO create entity in service and return id for that entity
         UUID entityId= fileDataService.createFile(fileData);
 
-        return ResponseEntity.created(new URI("/api/files-data"+entityId)).build();
+        return ResponseEntity.created(new URI("/api/files-data/"+entityId)).build();
     }
 
     @PutMapping("/{id}")
@@ -47,6 +47,7 @@ public class FilaDataController {
     public void updateFile(@RequestBody FileData fileData, @PathVariable UUID id){
         //TODO use servi
         fileDataService.updateFile(fileData,id);
+
     }
 
     @ExceptionHandler(SdaException.class)
