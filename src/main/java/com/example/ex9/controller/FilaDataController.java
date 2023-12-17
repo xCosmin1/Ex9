@@ -55,5 +55,9 @@ public class FilaDataController {
         log.error("Error processing request",ex);
         return ex.getMessage();
     }
+    @DeleteMapping("{id}")
+    public void deleteFile(@PathVariable UUID id){
+        fileDataService.deleteFileById(id);
 
+    }
 }

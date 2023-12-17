@@ -15,35 +15,32 @@ public class FileDataService {
     private final FileDataRepository fileDataRepository;
 
     public FileDataResults getAllFiles() {
-        return FileDataResults.builder()
+       return FileDataResults.builder()
                 .results(fileDataRepository.findAll())
                 .build();
     }
 
     public FileData getFileById(UUID id) {
-        return fileDataRepository.findById(id).orElseThrow(() -> new SdaException("Could not find file with id " + id));
+       return fileDataRepository.findById(id).orElseThrow(()->new SdaException("Could not find file with id " + id));
     }
 
     public UUID createFile(FileData fileData) {
-        //TODO use repo to create data
-         fileDataRepository.save(fileData);
-         return fileData.getId();
-
+        fileDataRepository.save(fileData);
+        return fileData.getId();
     }
 
     public void updateFile(FileData fileData, UUID id) {
         //TODO try to find file first. If found set the new values and save it
-        FileData existingInDb = getFileById(id);
-        existingInDb.setFileName(fileData.getFileName());
-        existingInDb.setExtension(fileData.getExtension());
-        existingInDb.setContent(fileData.getContent());
-        existingInDb.setSizeInKb(fileData.getSizeInKb());
-        fileDataRepository.save(existingInDb);
+       FileData existingInDB=getFileById(id);
+        existingInDB.setFileName(fileData.getFileName());
+        existingInDB.setExtension(fileData.getExtension());
+        existingInDB.setContent(fileData.getContent());
+        existingInDB.setSizeInKb(fileData.getSizeInKb());
+        fileDataRepository.save(existingInDB);
+    }
 
-
-
-
-
-
+    public void deleteFileById(UUID id) {
+        getFileById(id);
+        fileDataRepository.deleteById(id);
     }
 }
